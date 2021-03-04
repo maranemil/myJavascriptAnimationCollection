@@ -1,0 +1,2 @@
+# myJavascriptAnimationCollection
+My Javascript Animations Collection
