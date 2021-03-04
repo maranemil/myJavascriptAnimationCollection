@@ -8,7 +8,7 @@ My Javascript Animations Collection
 
 
 description|demo number|screenshot
------|-----|-----
+---------|----------------------|----
 jQuery Slide| demo01 | <img src="https://raw.githubusercontent.com/maranemil/myJavascriptAnimationCollection/main/screenshots/demo01.png"  height="150"/>
 jQuery Parallax|  demo02 | <img src="https://raw.githubusercontent.com/maranemil/myJavascriptAnimationCollection/main/screenshots/demo02.png"  height="150"/>
 jQuery Carousel|  demo03 | <img src="https://raw.githubusercontent.com/maranemil/myJavascriptAnimationCollection/main/screenshots/demo03.png"  height="150"/>
@@ -28,4 +28,4 @@ Three.js 3D octahedron|  demo16 | <img src="https://raw.githubusercontent.com/ma
 Three.js Masonry Grid |  demo17 | <img src="https://raw.githubusercontent.com/maranemil/myJavascriptAnimationCollection/main/screenshots/demo17.png"  height="150"/>
 Three.js octahedron|  demo18 | <img src="https://raw.githubusercontent.com/maranemil/myJavascriptAnimationCollection/main/screenshots/demo18.png"  height="150"/>
 Three.js octahedron|  demo19 | <img src="https://raw.githubusercontent.com/maranemil/myJavascriptAnimationCollection/main/screenshots/demo19.png"  height="150"/>
-Three.js Statistic|  demo20 | ![Editor Screen](https://raw.githubusercontent.com/maranemil/myJavascriptAnimationCollection/main/screenshots/demo20.png)]
+Three.js Statistic|  demo20 | <img src="https://raw.githubusercontent.com/maranemil/myJavascriptAnimationCollection/main/screenshots/demo20.png"  height="150"/>
