@@ -1,0 +1,70 @@
+	body { 
+		background: #444444; overflow-x: hidden; /*overflow-y: hidden;*/
+
+		filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#444444', endColorstr='#000000'); 
+		background: -webkit-gradient(linear, left top, left bottom, from(#444444), to(#000000)); 
+		background: -moz-linear-gradient(top,  #444444,  #000000);
+
+		width: 100%;
+		height: 1500px;
+	}
+	a { text-decoration: none; color: #D5B367 }
+
+	#room {
+		background: url("../img/bg_room.png") no-repeat;
+		width: 1104px;
+		height: 488px;
+		margin: 0px auto;
+		z-index: 4;
+		overflow: hidden;
+		border: 5px solid white;
+	}
+
+	#slide {
+		/*width: 1104px;
+		height: 488px;*/
+		z-index: 33;
+		overflow: hidden;
+		
+	}
+
+	#slide li { list-style: none; }
+
+	.blurbHolder { display: none; margin-top: 50px }
+
+	.layer1 { position: absolute; left: -550px; }
+	.layer2 { position: absolute; left: 2400px  }
+	.layer3 { position: absolute; top: -500px; margin-left: 170px   }
+	.layer4 { position: absolute; top: -500px; margin-left: 530px;  }
+
+	.animSel { display: block }
+
+
+
+	/*-------------------- 
+		HEADER
+	--------------------*/
+	#header{
+		width: 1100px; 
+		height: 45px;
+		/*margin-left:  300px;
+		margin-top:  0px;*/
+		margin: 0px auto;
+		color: #fff;
+		font: normal 24px Calibri;
+		text-shadow: 1px 1px 0 #111;
+	}
+
+	/*-------------------- 
+		FOOTER
+	--------------------*/
+	#footer {
+		width: 1100px; 
+		height: 45px;
+		/*margin-left:  300px;
+		margin-top:  0px;*/
+		margin: 0px auto;
+		color: #fff;
+		font: normal 14px Calibri;
+		text-shadow: 1px 1px 0 #111;
+	}

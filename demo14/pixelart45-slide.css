@@ -1,0 +1,125 @@
+﻿
+body { overflow-x: hidden; overflow-y: hidden; margin: 0; background: #aaa;}
+#view:hover {}
+
+.error { position: absolute; top: 316px; width: 465px; text-align: center; display: none; z-index: 100; }
+.error, x:-moz-any-link { display: block; }
+#scroll, x:-moz-any-link { display: none; }
+
+
+#view { width: 960px; height: 795px; background: #eee; margin: 50px auto; }
+
+#world { 
+	position: absolute; width: 880px; height: 880px; top: 50%; left: 50%; border: 1px solid #999; background: #fff; 
+	margin: 50px 0 0 -400px;
+	-webkit-transform-origin: 0% 0%;
+	-webkit-transform: scale(0.5) rotate(-45deg) skew(20deg, 20deg);
+	-moz-transform-origin: 0% 0%;
+	-moz-transform: scale(0.5) rotate(-45deg) skew(20deg, 20deg);
+	transform-origin: 0% 0%;
+	transform: scale(0.5) rotate(-45deg) skew(20deg, 20deg);
+}
+
+#bg { position: absolute; top: 0; left: 0; width: 880px; height: 880px; }
+
+.block { 
+	width: 80px; height: 80px; float: left; background: #fff000;
+	/*-webkit-box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.1);
+	-moz-box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.1);
+	box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.1);*/
+	/*-webkit-transform:  translateZ(5px) perspective(7px);
+	-moz-transform: translateZ(5px) perspective(7px);
+	transform: translateZ(5px) perspective(7px);*/
+}
+
+
+.block:hover { 
+	/*width: 80px; height: 80px; float: left; background: #fff000;
+	-webkit-transform-origin: 0% 0%;
+	-webkit-transform: scale(1.0) rotate(0deg) skew(0deg, 0deg) translate(12px, 50%) perspective(17px);
+	-moz-transform-origin: 0% 0%;
+	-moz-transform: scale(1.0) rotate(0deg) skew(0deg, 0deg) translate(12px, 50%) perspective(17px);
+	transform-origin: 0% 0%;
+	transform: scale(1.0) rotate(0deg) skew(0deg, 0deg) translate(12px, 50%) perspective(17px);*/
+	
+}
+
+/*
+http://www.w3schools.com/css3/css3_2dtransforms.asp
+http://www.w3schools.com/css3/css3_3dtransforms.asp
+http://webstandard.kulando.de/post/2010/12/16/css-2d-transform-scale-rotate-skrew-css3-adventskalender-tag-16
+https://developer.mozilla.org/en-US/docs/CSS/transform
+
+
+3D Transform Methods
+Function 	Description
+matrix3d
+(n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n) 	Defines a 3D transformation, using a 4x4 matrix of 16 values
+translate3d(x,y,z) 	Defines a 3D translation
+translateX(x) 	Defines a 3D translation, using only the value for the X-axis
+translateY(y) 	Defines a 3D translation, using only the value for the Y-axis
+translateZ(z) 	Defines a 3D translation, using only the value for the Z-axis
+scale3d(x,y,z) 	Defines a 3D scale transformation
+scaleX(x) 	Defines a 3D scale transformation by giving a value for the X-axis
+scaleY(y) 	Defines a 3D scale transformation by giving a value for the Y-axis
+scaleZ(z) 	Defines a 3D scale transformation by giving a value for the Z-axis
+rotate3d(x,y,z,angle) 	Defines a 3D rotation
+rotateX(angle) 	Defines a 3D rotation along the X-axis
+rotateY(angle) 	Defines a 3D rotation along the Y-axis
+rotateZ(angle) 	Defines a 3D rotation along the Z-axis
+perspective(n) 	Defines a perspective view for a 3D transformed element
+
+
+2D Transform Methods
+Function 	Description
+matrix(n,n,n,n,n,n) 	Defines a 2D transformation, using a matrix of six values
+translate(x,y) 	Defines a 2D translation, moving the element along the X- and the Y-axis
+translateX(n) 	Defines a 2D translation, moving the element along the X-axis
+translateY(n) 	Defines a 2D translation, moving the element along the Y-axis
+scale(x,y) 	Defines a 2D scale transformation, changing the elements width and height
+scaleX(n) 	Defines a 2D scale transformation, changing the element's width
+scaleY(n) 	Defines a 2D scale transformation, changing the element's height
+rotate(angle) 	Defines a 2D rotation, the angle is specified in the parameter
+skew(x-angle,y-angle) 	Defines a 2D skew transformation along the X- and the Y-axis
+skewX(angle) 	Defines a 2D skew transformation along the X-axis
+skewY(angle) 	Defines a 2D skew transformation along the Y-axis
+
+
+
+*/
+
+/*
+*
+*
+*
+*
+*
+*
+*/
+
+/* TEST ITEMS
+---------------------------------------*/
+.ui-widget-content
+{
+	background: transparent; position: absolute; 
+	/*-moz-transform: scale(1.0) rotateY(-40deg) rotateX(30deg) skew(25deg, 20deg);
+	-webkit-transform: scale(1.0) rotateY(-40deg) rotateX(30deg) skew(25deg, 20deg);*/
+	left: -656px; top: -6px;
+	/*box-shadow: 10px -10px 1px #888;*/
+	/*box-shadow: 20px 20px 30px rgba(44, 44, 44, 0.2);*/
+}
+
+/*
+.slide-el1 {  }
+.slide-el2 { left: -606px; top: -6px; }
+.slide-el3 { left: -600px; top: -6px; }
+.slide-el4 { left: -600px; top: -6px; }
+.slide-el5 { left: -600px; top: -6px; }
+.slide-el6 { left: -600px; top: -6px; }
+*/
+
+#status { position: absolute; left: 6px; top: 6px; font: normal 11px Arial; background: #fff; padding: 5px; }
+#navigation  { position: absolute; left: 50%; bottom: 1px; font: bold 11px Arial; background: #fff; padding: 5px; border: 1px solid #333 }
+
+#world { box-shadow: 20px -20px 15px #888;  }
+/*.block { box-shadow: 10px -10px 1px #ccc; }*/

@@ -1,0 +1,894 @@
+<!doctype html>
+<!--[if lt IE 7]> <html lang="en-us" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>    <html lang="en-us" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>    <html lang="en-us" class="no-js lt-ie9"> <![endif]-->
+<!--[if IE 9]>    <html lang="en-us" class="no-js ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html lang="en-us" class="no-js"> <!--<![endif]-->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<!-- 
+
+                   . .                  
+                 .$7778...+=..      .   
+   .          .,III77777777777..   .    
+     ..    ..7II++I777777777777$..      
+       ,   .IIII7II777777877777I7:.     
+           .IIIIIII777777777777777.     
+       .DIIIIIIIIII77777777777777D.     
+    ...I?IIII?IIIII77777777777777$$D..  
+ ...IIIIIIIIIIII7ID77777777777777$$$Z.  
+ .IIIIII?IIIIIIIIII7777I777777777$$$$D  
+ ?IIZDDI8$$IIIIIIII777?7777777777$$$$$. 
+ .IIIII$$I7$$8I$8II$$O7IIZ7777777$$D$8  
+ ZI?III?$+DOD8O8ZO7ZZZZ7Z?7I777$787$8.  
+ .?IIIIII?OZZD88$$$$$$7I77777??$8$7:    
+ ...IIIIIIIII .$D$$$DO77777777777$?.    
+    ~II???II.   .$$$Z$$Z7O77DD77.       
+      .:Z+.    .$$$$ZD......877Z        
+           .   .D8$$ZD      .           
+                .8O$$D                  
+       .       .D$$$ZD         .        
+               .$$$$$$.                 
+              D$$$$$$$O$.               
+   .        .$$?...$$8$..$Z~          
+
+                                                                  __ /\_ \     
+  ___ ___      __     _ __    __      ___          __    ___ ___ /\_\\//\ \    
+/' __` __`\  /'__`\  /\`'__\/'__`\  /' _ `\      /'__`\/' __` __`\/\ \ \ \ \   
+/\ \/\ \/\ \/\ \L\.\_\ \ \//\ \L\.\_/\ \/\ \    /\  __//\ \/\ \/\ \ \ \ \_\ \_ 
+\ \_\ \_\ \_\ \__/.\_\\ \_\\ \__/.\_\ \_\ \_\   \ \____\ \_\ \_\ \_\ \_\/\____\
+ \/_/\/_/\/_/\/__/\/_/ \/_/ \/__/\/_/\/_/\/_/    \/____/\/_/\/_/\/_/\/_/\/____/
+                                                                               
+
+ _     _             _ ____                              _                      _       
+| |__ | |_ _ __ ___ | | ___|    _____  ___ __   ___ _ __(_)_ __ ___   ___ _ __ | |_ ___ 
+| '_ \| __| '_ ` _ \| |___ \   / _ \ \/ / '_ \ / _ \ '__| | '_ ` _ \ / _ \ '_ \| __/ __|
+| | | | |_| | | | | | |___) | |  __/>  <| |_) |  __/ |  | | | | | | |  __/ | | | |_\__ \
+|_| |_|\__|_| |_| |_|_|____/   \___/_/\_\ .__/ \___|_|  |_|_| |_| |_|\___|_| |_|\__|___/
+                                        |_|                                             
+                                                                               
+...........................................................
+
+Ascii Generator - http://www.network-science.de/ascii/
+
+Font: larry3d  
+Font: ogre
+Font: rectangles 
+Font: rounded 
+Font: shadow 
+Font: slant
+Font: small  
+Font: smslant
+Font: standard 
+Font: stop
+
+...........................................................
+
+GlassGiant.com 
+http://www.glassgiant.com/ascii/
+
+...........................................................
+
+-->
+
+  <title>Isotope Demo with Three.Js</title>
+  <!--[if lt IE 9]><script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+		*, #container{ font: normal 10px arial; }
+		#content { margin: 0px; width: 600px; }
+		#container {
+			position: relative;
+			overflow: hidden;
+			height: 700px;
+			width: 650px !important;
+			border: 0px;
+		}
+		canvas {
+			height: 600px;
+			width: 700px;
+			float: left;
+			top: 20px; right: 20px;
+			position: absolute;
+		} 
+		#options { display: none }
+
+		.element.other.nonmetal {
+			background: hsl(120,100%, 50%); /*http://www.css3.info/preview/hsl/*/
+		}
+	
+	/* 230px 350px */
+	
+	/*.element.width2 { width: 110px !important; }
+	.element.height2 { height: 110px !important; }*/
+	
+	/*.large
+    {
+		width: 260px !important;
+		height: 260px !important;
+		z-index: 100;
+	}*/
+
+</style>
+  
+  <!-- scripts at bottom of page -->
+
+</head>
+<body class="demos "> 
+
+	<section id="content">
+    
+
+		<section id="options" class="clearfix">
+			<h3>Layout modes</h3>
+			<ul id="layouts" class="option-set clearfix" data-option-key="layoutMode">
+			  <li><a href="#masonry" data-option-value="masonry" class="selected">masonry</a></li>
+			  <!-- <li><a href="#masonryHorizontal" data-option-value="masonryHorizontal" class="horizontal">masonryHorizontal</a></li> -->
+			</ul>
+		</section>
+
+
+  
+  <div id="container" class="variable-sizes clearfix">    
+          
+    <div class="element other nonmetal   " data-symbol="H" data-category="other">
+      <p class="number">1</p>
+      <h3 class="symbol">H</h3>
+      <h2 class="name">Hydrogen</h2>
+      <p class="weight">1.00794</p>
+    </div>
+
+    <div class="element noble-gas nonmetal   " data-symbol="He" data-category="noble-gas">
+      <p class="number">2</p>
+      <h3 class="symbol">He</h3>
+      <h2 class="name">Helium</h2>
+      <p class="weight">4.002602</p>
+    </div>
+
+    <div class="element alkali metal   " data-symbol="Li" data-category="alkali">
+      <p class="number">3</p>
+      <h3 class="symbol">Li</h3>
+      <h2 class="name">Lithium</h2>
+      <p class="weight">6.941</p>
+    </div>
+
+    <div class="element alkaline-earth metal   " data-symbol="Be" data-category="alkaline-earth">
+      <p class="number">4</p>
+      <h3 class="symbol">Be</h3>
+      <h2 class="name">Beryllium</h2>
+      <p class="weight">9.012182</p>
+    </div>
+
+    <div class="element metalloid   " data-symbol="B" data-category="metalloid">
+      <p class="number">5</p>
+      <h3 class="symbol">B</h3>
+      <h2 class="name">Boron</h2>
+      <p class="weight">10.811</p>
+    </div>
+
+    <div class="element other nonmetal   " data-symbol="C" data-category="other">
+      <p class="number">6</p>
+      <h3 class="symbol">C</h3>
+      <h2 class="name">Carbon</h2>
+      <p class="weight">12.0107</p>
+    </div>
+
+    <div class="element other nonmetal   " data-symbol="N" data-category="other">
+      <p class="number">7</p>
+      <h3 class="symbol">N</h3>
+      <h2 class="name">Nitrogen</h2>
+      <p class="weight">14.0067</p>
+    </div>
+
+    <div class="element other nonmetal   " data-symbol="O" data-category="other">
+      <p class="number">8</p>
+      <h3 class="symbol">O</h3>
+      <h2 class="name">Oxygen</h2>
+      <p class="weight">15.9994</p>
+    </div>
+
+    <div class="element halogen nonmetal   " data-symbol="F" data-category="halogen">
+      <p class="number">9</p>
+      <h3 class="symbol">F</h3>
+      <h2 class="name">Fluorine</h2>
+      <p class="weight">18.9984032</p>
+    </div>
+
+    <div class="element noble-gas nonmetal   " data-symbol="Ne" data-category="noble-gas">
+      <p class="number">10</p>
+      <h3 class="symbol">Ne</h3>
+      <h2 class="name">Neon</h2>
+      <p class="weight">20.1797</p>
+    </div>
+
+    <div class="element alkali metal   " data-symbol="Na" data-category="alkali">
+      <p class="number">11</p>
+      <h3 class="symbol">Na</h3>
+      <h2 class="name">Sodium</h2>
+      <p class="weight">22.98976928</p>
+    </div>
+
+    <div class="element alkaline-earth metal   " data-symbol="Mg" data-category="alkaline-earth">
+      <p class="number">12</p>
+      <h3 class="symbol">Mg</h3>
+      <h2 class="name">Magnesium</h2>
+      <p class="weight">24.305</p>
+    </div>
+
+	<div class="element other nonmetal   " data-symbol="P" data-category="other">
+      <p class="number">15</p>
+      <h3 class="symbol">P</h3>
+      <h2 class="name">Phosphorus</h2>
+      <p class="weight">30.973762</p>
+    </div>
+    
+          
+    <div class="element other nonmetal   " data-symbol="S" data-category="other">
+      <p class="number">16</p>
+      <h3 class="symbol">S</h3>
+      <h2 class="name">Sulfur</h2>
+      <p class="weight">32.065</p>
+    </div>
+
+    <div class="element alkaline-earth metal   " data-symbol="Ca" data-category="alkaline-earth">
+      <p class="number">20</p>
+      <h3 class="symbol">Ca</h3>
+      <h2 class="name">Calcium</h2>
+      <p class="weight">40.078</p>
+    </div>
+    
+  </div> <!-- #container -->
+  
+
+  <script src="js/jquery-1.7.1.min.js"></script>
+  <script src="js/jquery.isotope.min.js"></script>
+  <script>
+    $(function(){
+      
+      var $container = $('#container');      
+      
+      // add randomish size classes
+      $container.find('.element').each(function(){
+        var $this = $(this),
+            number = parseInt( $this.find('.number').text(), 10 );
+        if ( number % 7 % 2 === 1 ) {
+          $this.addClass('width2');
+        }
+        if ( number % 3 === 0 ) {
+          $this.addClass('height2');
+        }
+      });
+      
+      $container.isotope({
+        itemSelector : '.element',
+        masonry : {
+          columnWidth : 120
+        },
+        masonryHorizontal : {
+          rowHeight: 120
+        },
+        cellsByRow : {
+          columnWidth : 240,
+          rowHeight : 240
+        },
+        cellsByColumn : {
+          columnWidth : 240,
+          rowHeight : 240
+        }
+      });
+      
+      
+      // change layout
+      var isHorizontal = false;
+      function changeLayoutMode( $link, options ) {
+        var wasHorizontal = isHorizontal;
+        isHorizontal = $link.hasClass('horizontal');
+
+        if ( wasHorizontal !== isHorizontal ) {
+          // orientation change
+          // need to do some clean up for transitions and sizes
+          var style = isHorizontal ? 
+            { height: '80%', width: $container.width() } : 
+            { width: 'auto' };
+          // stop any animation on container height / width
+          $container.filter(':animated').stop();
+          // disable transition, apply revised style
+          $container.addClass('no-transition').css( style );
+          setTimeout(function(){
+            $container.removeClass('no-transition').isotope( options );
+          }, 100 )
+        } else {
+          $container.isotope( options );
+        }
+      }
+
+
+      
+      var $optionSets = $('#options .option-set'),
+          $optionLinks = $optionSets.find('a');
+
+      $optionLinks.click(function(){
+        var $this = $(this);
+        // don't proceed if already selected
+        if ( $this.hasClass('selected') ) {
+          return false;
+        }
+        var $optionSet = $this.parents('.option-set');
+        $optionSet.find('.selected').removeClass('selected');
+        $this.addClass('selected');
+  
+        // make option object dynamically, i.e. { filter: '.my-filter-class' }
+        var options = {},
+            key = $optionSet.attr('data-option-key'),
+            value = $this.attr('data-option-value');
+        // parse 'false' as false boolean
+        value = value === 'false' ? false : value;
+        options[ key ] = value;
+        if ( key === 'layoutMode' && typeof changeLayoutMode === 'function' ) {
+          // changes in layout modes need extra logic
+          changeLayoutMode( $this, options )
+        } else {
+          // otherwise, apply new options
+          $container.isotope( options );
+        }
+
+		$.init3DGraph();
+        
+        return false;
+      });
+      
+    });
+  </script>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+  
+     <script>
+
+	 /////////////////////////////////////////////////////////////////////////////////////
+	 //
+	 // Read elemens positions and store in object
+	 //
+	 /////////////////////////////////////////////////////////////////////////////////////
+	 	 
+	 var arPos2D = {};
+	
+		$(document).ready(function(){
+
+		$.init3DGraph = function(){
+  
+		setTimeout(function(){
+		
+			var oList = $('#container > .element');
+			$.each( oList, function(i,value) {
+			
+				//$('.element').eq(i).css({"background":"#123456"});
+				
+				var p = jQuery("#container .element").eq(i);
+				var position = p.position();
+				var offset = p.offset();
+				
+				if(!$('.element').eq(i).hasClass("height2")&&!$('.element').eq(i).hasClass("width2")){
+					
+					arPos2D[i] = 
+						parseInt( $('.element').eq(i).css("width").replace("px","")) + '|' + 
+						parseInt( $('.element').eq(i).css("height").replace("px","")) + '|' + 
+						parseInt(  -60 + position.top ) + '|' + 
+						parseInt(  -60 + position.left ) + '|' + 
+						$('.element').eq(i).css("background");
+				}
+				else if(!$('.element').eq(i).hasClass("height2")&&$('.element').eq(i).hasClass("width2")){
+					
+					arPos2D[i] = 
+						parseInt( $('.element').eq(i).css("width").replace("px","")) + '|' + 
+						parseInt( $('.element').eq(i).css("height").replace("px","")) + '|' + 
+						parseInt(  -60 + position.top ) + '|' + 
+						parseInt(  0 + position.left ) + '|' + 
+						$('.element').eq(i).css("background");
+				}
+				else if($('.element').eq(i).hasClass("height2")&&!$('.element').eq(i).hasClass("width2")){
+					
+					arPos2D[i] = 
+						parseInt( $('.element').eq(i).css("width").replace("px","")) + '|' + 
+						parseInt( $('.element').eq(i).css("height").replace("px","")) + '|' + 
+						parseInt(  0 + position.top ) + '|' + 
+						parseInt(  -60 + position.left ) + '|' + 
+						$('.element').eq(i).css("background");
+				}
+				else{
+				
+					arPos2D[i] = 
+						parseInt($('.element').eq(i).css("width").replace("px","") ) + '|' + 
+						parseInt($('.element').eq(i).css("height").replace("px","") ) + '|' + 
+						parseInt( 0 + position.top ) + '|' + 
+						parseInt( 0 + position.left ) + '|' + 
+						$('.element').eq(i).css("background");
+				}
+
+			});
+			
+			//console.log(arPos2D[1])
+			
+			start3DGraph(arPos2D);
+			
+			
+		},600);
+
+		}
+
+		$.init3DGraph();
+		
+		
+            
+		});
+  </script>
+  
+  
+  
+<script src="js/three.min.js"></script>
+<script src="js/Detector.js"></script>
+<script src="js/stats.min.js"></script>
+
+  <script>
+
+  	 /////////////////////////////////////////////////////////////////////////////////////
+	 //
+	 // http://www.mrdoob.com/lab/javascript/threejs/css3d/periodictable/
+	 // http://www.mrdoob.com/files/temp/xplsv_obsidian/
+	 //
+	 /////////////////////////////////////////////////////////////////////////////////////
+  
+  
+  if ( ! Detector.webgl ) Detector.addGetWebGLMessage();
+
+			var SaveAsWEbGL = 0;
+			var SaveAsVideo = 0;
+
+			var composer;
+			var object, light;
+
+			var radius = 560, theta = 0;
+			var container, stats;
+
+			var camera, scene, renderer, objects;
+			var particleLight, pointLight;
+
+			var container, interval, camera, scene, renderer;
+			var projector, plane, cube, linesMaterial;
+
+			var color = 0,colors = [ 0xDF1F1F, 0xDFAF1F, 0x80DF1F, 0x1FDF50, 0x1FDFDF, 0x1F4FDF, 0x7F1FDF, 0xDF1FAF, 0xEFEFEF, 0x303030 ];
+			var brush, objectHovered, mouse3D, isMouseDown = false;
+			var radious = 1600, theta = 45, onMouseDownTheta = 45, phi = 60, onMouseDownPhi = 60, isShiftDown = false;
+
+			var onMouseDownPosition = new Object;
+			var ray = new Object;
+
+			var texture_placeholder,
+			isUserInteracting = false,
+			onMouseDownMouseX = 0, onMouseDownMouseY = 0,
+			lon = 90, onMouseDownLon = 0,
+			lat = 0, onMouseDownLat = 0,
+			phi = 0, theta = 0,
+			target = new THREE.Vector3();
+
+			var windowHalfX = 610; // 
+			var windowHalfY = 610; // 
+
+			//var windowHalfX = 1280; // 
+			//var windowHalfY = 720; // 
+
+			//var windowHalfX = 720; // 
+			//var windowHalfY = 480; // 
+
+			//var windowHalfX = window.innerWidth ;
+			//var windowHalfY = window.innerHeight ;
+
+			var container, stats;
+			var camera, scene, renderer;
+			var mesh, group1, group2, group3, light;
+			var mouseX = 0, mouseY = 0;
+			
+			//var windowHalfX = window.innerWidth / 2;
+			//var windowHalfY = window.innerHeight / 2;
+
+			function start3DGraph(arPos2D){ 
+				init(arPos2D);
+				animate();
+			}
+
+			function init(arPos2D) {
+
+				container = document.createElement('div');
+				document.body.appendChild(container);
+
+				camera = new THREE.PerspectiveCamera( 74, windowHalfX / windowHalfY, 20, 4000 );
+				camera.position.x = -485;
+				camera.position.y = -485;
+				camera.position.z = 1085;
+
+				scene = new THREE.Scene();
+
+				var light1 = new THREE.DirectionalLight( 0xffffff, 0.5 );
+				light1.position.set( 1, 1, 1 );
+				scene.add( light1 );
+
+				var light2 = new THREE.DirectionalLight( 0xffffff, 0.5 );
+				light2.position.set( 0, -1, 0 );
+				scene.add( light2 );
+
+				projector = new THREE.Projector();
+				group = new THREE.Object3D();//create an empty container
+				
+				/*
+				*
+				*
+				*
+				*
+				*
+				*
+				*
+				*/
+
+				//////////////////////////////////////////////////////////////////////
+				//
+				// Cubes
+				//
+				//////////////////////////////////////////////////////////////////////
+
+				$.each(arPos2D, function(i,item){
+
+					var arNfoCube = arPos2D[i].split('|');
+
+					// get isotope colors 
+					var rgbTmp = arNfoCube[4].split(")")
+					var rgbTmp2 = rgbTmp[0].split("(")
+					var rgbCube = rgbTmp2[1].split(",")
+
+					//console.log(rgbCube)
+										
+					var geometry = new THREE.CubeGeometry( parseInt(arNfoCube[0]), parseInt( arNfoCube[1]), 200 );
+					var object = new THREE.Mesh( 
+						geometry, 
+						new THREE.MeshLambertMaterial ( { // MeshNormalMaterial MeshLambertMaterial MeshBasicMaterial  MeshPhongMaterial
+							//color: Math.random() * 0xffffff
+							color:new THREE.Color().setRGB(parseInt(rgbCube[0]),parseInt(rgbCube[1]),parseInt(rgbCube[2]))
+							
+							
+						} )
+					);
+					
+					/*
+					background: #00F;
+					background: hsl( 252, 100%, 50%);
+					*/
+
+					object.position.x = + arNfoCube[3] -100;
+					object.position.y = - arNfoCube[2] +320;
+					object.position.z = 520;
+					scene.add( object );
+
+				});
+
+				//projector = new THREE.Projector();
+				//raycaster = new THREE.Raycaster();
+
+				/*
+				*
+				*
+				*
+				*
+				*
+				*
+				*
+				*/
+
+				///////////////////////////////////////////
+				// RENDERER WebGLRenderer CanvasRenderer
+				///////////////////////////////////////////
+
+				if( (navigator.userAgent.match(/Chrome/i)) ) {
+					
+					renderer = new THREE.WebGLRenderer({
+						antialias: false,
+						clearColor: 0xffffff,
+						clearAlpha: 1,
+						alpha: true,
+						preserveDrawingBuffer: true 
+						/*****
+						preserveDrawingBuffer to allow screenshot
+						*****/
+					});
+				}
+				else{
+					//renderer = new THREE.WebGLRenderer( {antialias:true} );
+					renderer = new THREE.WebGLRenderer({ preserveDrawingBuffer: true, antialias:true });
+					//renderer = new THREE.CanvasRenderer( {antialias:true} );
+				}
+
+				//renderer = new THREE.WebGLRenderer( { antialias: true } );
+				renderer.setSize( windowHalfX, windowHalfY );
+				container.appendChild( renderer.domElement );
+
+				/*
+				*
+				*
+				*
+				*
+				*
+				*
+				*
+				*/
+
+				stats = new Stats();
+				stats.domElement.style.position = 'absolute';
+				stats.domElement.style.top = '0px';
+				container.appendChild( stats.domElement );
+
+				document.addEventListener( 'mousemove', onDocumentMouseMove, false );
+				window.addEventListener( 'resize', onWindowResize, false );
+
+			}
+
+
+			function onWindowResize() {
+				windowHalfX = window.innerWidth / 2;
+				windowHalfY = window.innerHeight / 2;
+				camera.aspect = window.innerWidth / window.innerHeight;
+				camera.updateProjectionMatrix();
+				renderer.setSize( window.innerWidth, window.innerHeight );
+			}
+
+			function onDocumentMouseMove( event ) {
+				
+				mouseX = ( event.clientX - windowHalfX );
+				mouseY = ( event.clientY - windowHalfY );
+
+			}
+
+			function loadTexture( path ) {
+				var texture = new THREE.Texture( texture_placeholder );
+				var material = new THREE.MeshBasicMaterial( { map: texture, overdraw: true } );
+				var image = new Image();
+				image.onload = function () {
+					texture.needsUpdate = true;
+					material.map.image = this;
+					render();
+				};
+				image.src = path;
+				return material;
+			}
+
+			////////////////////////////////////////////////////////////////////////
+			//
+			// LOADIMAGE
+			//
+			////////////////////////////////////////////////////////////////////////
+
+			function loadImage( path ) {
+				var image = document.createElement( 'img' );
+				var texture = new THREE.Texture( image, THREE.UVMapping )
+				image.onload = function () { texture.needsUpdate = true; };
+				image.src = path;
+				return texture;
+
+			}
+
+			function animate() {
+				requestAnimationFrame( animate );
+				render();
+				stats.update();
+			}
+
+			var r = 0;
+			function render() {
+
+				/*theta += 0.05;
+
+				camera.position.x = radius * Math.sin( THREE.Math.degToRad( theta ) );
+				camera.position.y = radius * Math.sin( THREE.Math.degToRad( theta ) );
+				camera.position.z = radius * Math.cos( THREE.Math.degToRad( theta ) );*/
+
+				camera.position.x += ( mouseX - camera.position.x ) * .05;
+				camera.position.y += ( - mouseY - camera.position.y ) * .05;
+				///camera.position.z += ( mouseY - camera.position.x ) * .05;
+				camera.lookAt( scene.position );
+
+				//areaLight1.position.x = 200 * Math.cos( r );
+				//areaLight1.position.z = 400 * Math.sin( r );
+
+				var time = Date.now() * 0.002;
+
+				//areaLight1.rotation.z = time * 0.25;
+				//areaLight1.rotation.y = time * 0.25;
+
+				r += 0.003;
+
+				renderer.render( scene, camera );
+				//renderer.domElement.toDataURL();
+
+
+			}
+
+
+		</script>
+
+
+  
+  <script>
+
+
+/**
+ * Converts an RGB color value to HSL. Conversion formula
+ * adapted from http://en.wikipedia.org/wiki/HSL_color_space.
+ * Assumes r, g, and b are contained in the set [0, 255] and
+ * returns h, s, and l in the set [0, 1].
+ *
+ * @param   Number  r       The red color value
+ * @param   Number  g       The green color value
+ * @param   Number  b       The blue color value
+ * @return  Array           The HSL representation
+ */
+function rgbToHsl(r, g, b){
+    r /= 255, g /= 255, b /= 255;
+    var max = Math.max(r, g, b), min = Math.min(r, g, b);
+    var h, s, l = (max + min) / 2;
+
+    if(max == min){
+        h = s = 0; // achromatic
+    }else{
+        var d = max - min;
+        s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+        switch(max){
+            case r: h = (g - b) / d + (g < b ? 6 : 0); break;
+            case g: h = (b - r) / d + 2; break;
+            case b: h = (r - g) / d + 4; break;
+        }
+        h /= 6;
+    }
+
+    return [h, s, l];
+}
+
+/**
+ * Converts an HSL color value to RGB. Conversion formula
+ * adapted from http://en.wikipedia.org/wiki/HSL_color_space.
+ * Assumes h, s, and l are contained in the set [0, 1] and
+ * returns r, g, and b in the set [0, 255].
+ *
+ * @param   Number  h       The hue
+ * @param   Number  s       The saturation
+ * @param   Number  l       The lightness
+ * @return  Array           The RGB representation
+ */
+function hslToRgb(h, s, l){
+    var r, g, b;
+
+    if(s == 0){
+        r = g = b = l; // achromatic
+    }else{
+        function hue2rgb(p, q, t){
+            if(t < 0) t += 1;
+            if(t > 1) t -= 1;
+            if(t < 1/6) return p + (q - p) * 6 * t;
+            if(t < 1/2) return q;
+            if(t < 2/3) return p + (q - p) * (2/3 - t) * 6;
+            return p;
+        }
+
+        var q = l < 0.5 ? l * (1 + s) : l + s - l * s;
+        var p = 2 * l - q;
+        r = hue2rgb(p, q, h + 1/3);
+        g = hue2rgb(p, q, h);
+        b = hue2rgb(p, q, h - 1/3);
+    }
+
+    return [r * 255, g * 255, b * 255];
+}
+
+/**
+ * Converts an RGB color value to HSV. Conversion formula
+ * adapted from http://en.wikipedia.org/wiki/HSV_color_space.
+ * Assumes r, g, and b are contained in the set [0, 255] and
+ * returns h, s, and v in the set [0, 1].
+ *
+ * @param   Number  r       The red color value
+ * @param   Number  g       The green color value
+ * @param   Number  b       The blue color value
+ * @return  Array           The HSV representation
+ */
+function rgbToHsv(r, g, b){
+    r = r/255, g = g/255, b = b/255;
+    var max = Math.max(r, g, b), min = Math.min(r, g, b);
+    var h, s, v = max;
+
+    var d = max - min;
+    s = max == 0 ? 0 : d / max;
+
+    if(max == min){
+        h = 0; // achromatic
+    }else{
+        switch(max){
+            case r: h = (g - b) / d + (g < b ? 6 : 0); break;
+            case g: h = (b - r) / d + 2; break;
+            case b: h = (r - g) / d + 4; break;
+        }
+        h /= 6;
+    }
+
+    return [h, s, v];
+}
+
+/**
+ * Converts an HSV color value to RGB. Conversion formula
+ * adapted from http://en.wikipedia.org/wiki/HSV_color_space.
+ * Assumes h, s, and v are contained in the set [0, 1] and
+ * returns r, g, and b in the set [0, 255].
+ *
+ * @param   Number  h       The hue
+ * @param   Number  s       The saturation
+ * @param   Number  v       The value
+ * @return  Array           The RGB representation
+ */
+function hsvToRgb(h, s, v){
+    var r, g, b;
+
+    var i = Math.floor(h * 6);
+    var f = h * 6 - i;
+    var p = v * (1 - s);
+    var q = v * (1 - f * s);
+    var t = v * (1 - (1 - f) * s);
+
+    switch(i % 6){
+        case 0: r = v, g = t, b = p; break;
+        case 1: r = q, g = v, b = p; break;
+        case 2: r = p, g = v, b = t; break;
+        case 3: r = p, g = q, b = v; break;
+        case 4: r = t, g = p, b = v; break;
+        case 5: r = v, g = p, b = q; break;
+    }
+
+    return [r * 255, g * 255, b * 255];
+}
+
+
+
+
+  </script>
+  
+
+  </section> <!-- #content -->
+  
+
+</body>
+</html>

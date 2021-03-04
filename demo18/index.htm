@@ -1,0 +1,1048 @@
+<!doctype html>
+<!--[if lt IE 7]> <html lang="en-us" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>    <html lang="en-us" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>    <html lang="en-us" class="no-js lt-ie9"> <![endif]-->
+<!--[if IE 9]>    <html lang="en-us" class="no-js ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html lang="en-us" class="no-js"> <!--<![endif]-->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<!-- 
+
+                   . .                  
+                 .$7778...+=..      .   
+   .          .,III77777777777..   .    
+     ..    ..7II++I777777777777$..      
+       ,   .IIII7II777777877777I7:.     
+           .IIIIIII777777777777777.     
+       .DIIIIIIIIII77777777777777D.     
+    ...I?IIII?IIIII77777777777777$$D..  
+ ...IIIIIIIIIIII7ID77777777777777$$$Z.  
+ .IIIIII?IIIIIIIIII7777I777777777$$$$D  
+ ?IIZDDI8$$IIIIIIII777?7777777777$$$$$. 
+ .IIIII$$I7$$8I$8II$$O7IIZ7777777$$D$8  
+ ZI?III?$+DOD8O8ZO7ZZZZ7Z?7I777$787$8.  
+ .?IIIIII?OZZD88$$$$$$7I77777??$8$7:    
+ ...IIIIIIIII .$D$$$DO77777777777$?.    
+    ~II???II.   .$$$Z$$Z7O77DD77.       
+      .:Z+.    .$$$$ZD......877Z        
+           .   .D8$$ZD      .           
+                .8O$$D                  
+       .       .D$$$ZD         .        
+               .$$$$$$.                 
+              D$$$$$$$O$.               
+   .        .$$?...$$8$..$Z~          
+
+                                                                  __ /\_ \     
+  ___ ___      __     _ __    __      ___          __    ___ ___ /\_\\//\ \    
+/' __` __`\  /'__`\  /\`'__\/'__`\  /' _ `\      /'__`\/' __` __`\/\ \ \ \ \   
+/\ \/\ \/\ \/\ \L\.\_\ \ \//\ \L\.\_/\ \/\ \    /\  __//\ \/\ \/\ \ \ \ \_\ \_ 
+\ \_\ \_\ \_\ \__/.\_\\ \_\\ \__/.\_\ \_\ \_\   \ \____\ \_\ \_\ \_\ \_\/\____\
+ \/_/\/_/\/_/\/__/\/_/ \/_/ \/__/\/_/\/_/\/_/    \/____/\/_/\/_/\/_/\/_/\/____/
+                                                                               
+
+ _     _             _ ____                              _                      _       
+| |__ | |_ _ __ ___ | | ___|    _____  ___ __   ___ _ __(_)_ __ ___   ___ _ __ | |_ ___ 
+| '_ \| __| '_ ` _ \| |___ \   / _ \ \/ / '_ \ / _ \ '__| | '_ ` _ \ / _ \ '_ \| __/ __|
+| | | | |_| | | | | | |___) | |  __/>  <| |_) |  __/ |  | | | | | | |  __/ | | | |_\__ \
+|_| |_|\__|_| |_| |_|_|____/   \___/_/\_\ .__/ \___|_|  |_|_| |_| |_|\___|_| |_|\__|___/
+                                        |_|                                             
+                                                                               
+...........................................................
+
+Ascii Generator - http://www.network-science.de/ascii/
+
+Font: larry3d  
+Font: ogre
+Font: rectangles 
+Font: rounded 
+Font: shadow 
+Font: slant
+Font: small  
+Font: smslant
+Font: standard 
+Font: stop
+
+...........................................................
+
+GlassGiant.com 
+http://www.glassgiant.com/ascii/
+
+...........................................................
+
+-->
+		<title>three.js webgl - Icosahedron invasion</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<style>
+			body { color: #fff; font-family:Monospace; font-size:13px; text-align:center; margin: 0px; overflow: hidden; }
+			#info { position: absolute; top: 0px; width: 100%; padding: 5px; }
+			a { color: #0080ff; }
+			/*canvas { border: 1px solid red; }*/
+
+		</style>
+	</head>
+	<body>
+	
+		<div id="info">
+			<a href="http://threejs.org" target="_blank">three.js webgl - Icosahedron invasion </a>
+		</div>
+
+		<div id="container"></div>
+		<!-- <canvas name="content1"></canvas>
+		<canvas name="content2"></canvas> -->
+		
+		<script src="js/jquery_1.js"></script>
+	    <script src="js/three.min.js"></script>
+		<script src="js/BokehShader.js"></script>			
+		<script src="js/Detector.js"></script>
+		<script src='js/dat.gui.min.js'></script>
+		<script src="js/stats.min.js"></script>
+
+		<script>
+
+			if ( ! Detector.webgl ) Detector.addGetWebGLMessage();
+			
+
+
+			var composer;
+			var object, light;
+
+			var radius = 560, theta = 0;
+			var container, stats;
+
+			var camera, scene, renderer, objects;
+			var particleLight, pointLight;
+			
+			var group = [];
+
+			var container, interval, camera, scene, renderer;
+			var projector, plane, cube, linesMaterial;
+
+			var color = 0,colors = [ 0xDF1F1F, 0xDFAF1F, 0x80DF1F, 0x1FDF50, 0x1FDFDF, 0x1F4FDF, 0x7F1FDF, 0xDF1FAF, 0xEFEFEF, 0x303030 ];
+			var brush, objectHovered, mouse3D, isMouseDown = false;
+			var radious = 1600, theta = 45, onMouseDownTheta = 45, phi = 60, onMouseDownPhi = 60, isShiftDown = false;
+
+			var onMouseDownPosition = new Object;
+			var ray = new Object;
+
+			var texture_placeholder,
+			isUserInteracting = false,
+			onMouseDownMouseX = 0, onMouseDownMouseY = 0,
+			lon = 90, onMouseDownLon = 0,
+			lat = 0, onMouseDownLat = 0,
+			phi = 0, theta = 0,
+			target = new THREE.Vector3();
+
+			//var windowHalfX = 510; // 
+			//var windowHalfY = 288; // 
+
+			var windowHalfX = 1280; // 
+			var windowHalfY = 720; // 
+
+			//var windowHalfX = 720; // 
+			//var windowHalfY = 480; // 
+
+			var windowHalfX = window.innerWidth ;
+			var windowHalfY = window.innerHeight ;
+
+			var container, stats;
+			var camera, scene, renderer;
+			var mesh, group1, group2, group3, light;
+			var mouseX = 0, mouseY = 0;
+			
+			//var windowHalfX = window.innerWidth / 2;
+			//var windowHalfY = window.innerHeight / 2;
+
+			//////////////////////////////////////////////////////////////////////////////////
+			//
+			//
+			//
+			//////////////////////////////////////////////////////////////////////////////////
+			
+			var SCREEN_WIDTH = window.innerWidth;
+			var SCREEN_HEIGHT = window.innerHeight;
+			var FLOOR = -250;
+			var container, stats;
+			var camera, scene, controls;
+			var renderer;
+			var mesh;
+			var textureCube;
+			var cameraCube, sceneCube;
+			var loader;
+			var mouseX = 0, mouseY = 0;
+			
+			var postprocessing = { enabled  : true };
+			var height = window.innerHeight - 300;
+			
+			var container, stats;
+			var camera, scene, renderer,
+				materials = [], objects = [],
+				singleMaterial, zmaterial = [],
+				parameters, i, j, k, h, color, x, y, z, s, n, nobjects,
+				material_depth, cubeMaterial;
+
+			var mouseX = 0, mouseY = 0;
+
+			//var windowHalfX = window.innerWidth / 2;
+			//var windowHalfY = window.innerHeight / 2;
+
+			var height = window.innerHeight - 300;
+			var postprocessing = { enabled  : true };
+			
+			var shaderSettings = {
+				rings: 3,
+				samples: 4
+			};
+
+			var projector;
+			var singleMaterial = false;
+			var vector = new THREE.Vector3();
+			var distance = 1000;
+			var target = new THREE.Vector3( 0, 20, -50 );
+			var effectController;
+			var planes = [];
+			var leaves = 100;
+			
+			var SpheresX = 100;		
+			
+			//var windowHalfX = window.innerWidth / 2;
+			//var windowHalfY = window.innerHeight / 2;
+						
+			//////////////////////////////////////////////////////////////////////////////////
+			//
+			//
+			//
+			//////////////////////////////////////////////////////////////////////////////////
+				
+			var CameraZoom =  [45,45,25];
+
+			var SaveAsWEbGL = 0;
+			var SaveAsVideo = 0;
+
+				
+			init();
+			animate();
+
+			function init() {
+
+				//container = document.getElementById( 'container' );
+				container = document.createElement('div');
+				document.body.appendChild(container);		
+				var randCamZoom = parseInt(Math.random() * 2)	
+								
+				camera = new THREE.PerspectiveCamera( CameraZoom[randCamZoom], windowHalfX / windowHalfY, 1, 2500 );
+				camera.position.set( 10, -5.75, 30 );
+				camera.position.z = 10;										
+				
+				scene = new THREE.Scene();										
+				scene.fog = new THREE.Fog( 0x333333, 320, 3235 );					
+				scene.fog = new THREE.FogExp2( 0x555555, 0.0004 );							
+				
+				/*
+				*
+				*
+				*
+				*
+				*
+				*
+				*
+				*/
+			
+				/*var light = new THREE.PointLight( 0xff9900, 1, 5500 );
+				light.position.set( 400, 0, 0 );
+				scene.add( light );*/
+
+				var lightPoint = new THREE.PointLight( 0xff6600, 1, 2500 );
+				lightPoint.position.set( -40, 0, 0 );
+				scene.add( lightPoint );	
+				
+				var spotLight = new THREE.SpotLight( 0xff9900 );
+				spotLight.position.set( 100, 100, 100 );
+				spotLight.castShadow = true;
+				spotLight.shadowMapWidth = 1024;
+				spotLight.shadowMapHeight = 1024;
+				spotLight.shadowCameraNear = 50;
+				spotLight.shadowCameraFar = 4000;
+				spotLight.shadowCameraFov = 60;
+				scene.add( spotLight );
+
+				/*var light = new THREE.PointLight( 0xff0000, 1, 100 );
+				light.position.set( 50, 50, 50 );
+				scene.add( light );*/
+				
+		
+				/*var light1 = new THREE.DirectionalLight( 0x95DCF1, 0.5 );
+				light1.position.set( 1200, 1, 1 );
+				scene.add( light1 );
+
+				var light2 = new THREE.DirectionalLight( 0x95DCF1, 0.5 );
+				light2.position.set( 220, -1, 0 );
+				scene.add( light2 );*/			
+			
+				
+				/*
+				*
+				*
+				*
+				*
+				*
+				*
+				*
+				*/
+
+				/////////////////////////////////////////////
+				// lights
+				/////////////////////////////////////////////
+
+				light = new THREE.DirectionalLight( 0xffffff );
+				light.position.set( 100, 551, 22 );
+				scene.add( light );
+
+				light = new THREE.DirectionalLight( 0xffffff );
+				light.position.set( -110, -400, -200 );
+				scene.add( light );
+
+				light = new THREE.AmbientLight( 0x111111 );
+				scene.add( light );
+
+				////////////////////////////////////////////
+				// PROJECTOR
+				////////////////////////////////////////////
+
+				//projector = new THREE.Projector();
+				//group = new THREE.Object3D(); //create an empty container
+
+				/*
+				*
+				*
+				*
+				*
+				*
+				*
+				*
+				*/
+				
+				// ------------------------------------------------
+				// Panorama landscape
+				// ------------------------------------------------
+				
+				var materials = [
+					loadTexture( 'textures/cube/skybox/nx.jpg' ), // right
+					loadTexture( 'textures/cube/skybox/nx.jpg' ), // left
+					loadTexture( 'textures/cube/skybox/nx.jpg' ), // top
+					loadTexture( 'textures/cube/skybox/nx.jpg' ), // bottom
+					loadTexture( 'textures/cube/skybox/nx.jpg' ), // back
+					loadTexture( 'textures/cube/skybox/nx.jpg' )  // front
+				];
+
+				mesh = new THREE.Mesh( new THREE.SphereGeometry( 2500, 350, 10 ), new THREE.MeshDepthMaterial({overdraw: true}) );
+				mesh.scale.x = -1;
+				scene.add( mesh );
+
+				/*
+				*
+				*
+				*
+				*
+				*
+				*
+				*
+				*/	
+							
+				
+				//var geometry = new THREE.IcosahedronGeometry( 10, 0 );
+				//var geometry = new THREE.OctahedronGeometry( 10, 0 );
+				//var geometry = new THREE.TetrahedronGeometry( 10, 0 );
+								
+				//////////////////////////////////////////////////////////////////////
+				//
+				// Spheres
+				//
+				//////////////////////////////////////////////////////////////////////
+
+				var faceIndices = [ 'a', 'b', 'c', 'd' ];
+				var color, f, f2, f3, p, n, vertexIndex,
+					radius = 20,
+					geometry  = new THREE.OctahedronGeometry( radius, 1 ),
+					geometry2 = new THREE.OctahedronGeometry( radius, 2 ),
+					geometry3 = new THREE.OctahedronGeometry( radius, 3 );
+
+				for ( var i = 0; i < geometry.faces.length; i ++ ) {
+
+					f  = geometry.faces[ i ];
+					f2 = geometry2.faces[ i ];
+					f3 = geometry3.faces[ i ];
+
+					n = ( f instanceof THREE.Face3 ) ? 3 : 4;
+
+					for( var j = 0; j < n; j++ ) {
+						vertexIndex = f[ faceIndices[ j ] ];
+						p = geometry.vertices[ vertexIndex ];
+
+						color = new THREE.Color( 0xffffff );
+						//color.setHSL( 0.5, ( p.y / radius + 1 ) / 2, 0.4 );
+						//color.setHSL( 0.0, ( p.y / radius + 1 ) / 2, 0.5 );
+						//color.setHSL( ( p.y / radius + 1 ) / 2, 1.0, 0.5 );
+						color.setHSL( 0.125 * vertexIndex/geometry.vertices.length, 1.0, 0.5 );
+						f.vertexColors[ j ] = color;
+						
+						color = new THREE.Color( 0xffffff );
+						//color.setHSL( 0.5, ( p.y / radius + 1 ) / 2, 0.4 );
+						color.setHSL( 0.125 * vertexIndex/geometry.vertices.length, 1.0, 0.5 );
+						f2.vertexColors[ j ] = color;
+
+						color = new THREE.Color( 0xffffff );
+						//color.setHSL( 0.5, ( p.y / radius + 1 ) / 2, 0.4 );
+						color.setHSL( 0.125 * vertexIndex/geometry.vertices.length, 1.0, 0.5 );
+						f3.vertexColors[ j ] = color;
+					}
+				}
+
+				/*
+				MeshLambertMaterial
+				MeshBasicMaterial
+				*/
+
+				var materials = [
+					new THREE.MeshLambertMaterial( { color: 0x999999, shading: THREE.FlatShading, vertexColors: THREE.VertexColors, wireframe: false, transparent: false } ),
+					new THREE.MeshLambertMaterial( { color: 0x999999, shading: THREE.FlatShading, vertexColors: THREE.VertexColors, wireframe: false, transparent: false } )
+				];
+				
+				var group = [];
+				
+				for ( var i = 0; i < SpheresX ; i ++ ) {
+					group = THREE.SceneUtils.createMultiMaterialObject( geometry, materials );
+					
+					group.position.x = Math.random() * 500 * (parseInt(Math.random()*2) - 1 | 1);					
+					group.position.y = Math.random() * 500 * (parseInt(Math.random()*2) - 1 | 1);	
+					group.position.z = Math.random() * 500 * (parseInt(Math.random()*2) - 1 | 1);	
+										
+					group.scale.x = 2 * (parseInt(Math.random()*2) - 1 | 1);	
+					group.scale.y = 2 * (parseInt(Math.random()*2) - 1 | 1);	
+					group.scale.z = 2 * (parseInt(Math.random()*2) - 1 | 1);			
+
+					group.rotation.x = Math.random() * 3 * Math.PI;
+					group.rotation.y = Math.random() * 4 * Math.PI;
+					group.rotation.z = Math.random() * 5 * Math.PI;										
+					
+					objects.push( group );
+					scene.add( group );
+				}				
+
+				/*
+				group1 = THREE.SceneUtils.createMultiMaterialObject( geometry, materials );
+				group1.position.x = -400;
+				group1.position.y = -140;
+				group1.rotation.x = -1.87;
+				scene.add( group1 );
+				*/
+				
+				/*
+				*
+				*
+				*
+				*
+				*
+				*
+				*
+				*/
+
+				// http://www.icoachmath.com/math_dictionary/icosahedron.html
+				// http://stemkoski.github.io/Three.js/Shapes.html
+
+				//////////////////////////////////////////////////////////////////////
+				//
+				// Particles
+				//
+				//////////////////////////////////////////////////////////////////////
+
+				//var geometry = new THREE.CubeGeometry( 4, 4, 4 );
+				var geometry = new THREE.IcosahedronGeometry( 320, 1 );
+				//var geometry = new THREE.OctahedronGeometry( 225, 1 );
+				//var geometry = new THREE.TetrahedronGeometry( 250, 1 );
+
+				for ( var i = 0; i < 1; i ++ ) {
+
+					var object = new THREE.Mesh( 
+						geometry, 
+						//new THREE.MeshLambertMaterial( { color: Math.random() * 0xffffff } ) 
+						// MeshDepthMaterial MeshBasicMaterial MeshPhongMaterial MeshLambertMaterial
+						//new THREE.MeshLambertMaterial( { color: 0xffffff } )
+						//new THREE.MeshPhongMaterial( { ambient: 0x050505, color: 0x000000, specular: 0x555555, shininess: 30 } ) 
+						new THREE.MeshBasicMaterial( { 
+							//ambient: Math.random() * 0x333333,
+							color: 0x777777,
+							//specular: Math.random() * 0x111111,
+							//shininess: 0, 
+							wireframe: true, 
+							transparent: false,
+							overdraw: false
+							//shading: THREE.FlatShading
+						}) 
+					);
+					
+					object.position.x = 0;
+					object.position.y = 0;
+					object.position.z = 0;
+					
+					object.rotation.x = Math.random() * 18 * Math.PI;
+					object.rotation.y = Math.random() * 2 * Math.PI;
+					object.rotation.z = Math.random() * 7 * Math.PI;
+
+					/*
+					object.position.x = Math.random() * 800 - 400;
+					object.position.y = Math.random() * 800 - 400;
+					object.position.z = Math.random() * 800 - 400;
+
+					object.rotation.x = Math.random() * 2 * Math.PI;
+					object.rotation.y = Math.random() * 2 * Math.PI;
+					object.rotation.z = Math.random() * 2 * Math.PI;
+					*/
+
+					/*object.scale.x = Math.random() + 0.5;
+					object.scale.y = Math.random() + 0.5;
+					object.scale.z = Math.random() + 0.5;*/
+
+					scene.add( object );
+
+				}
+
+				//////////////////////////////////////////////////////////////////////
+				//
+				// Particles
+				//
+				//////////////////////////////////////////////////////////////////////
+
+				//var geometry = new THREE.CubeGeometry( 4, 4, 10 );
+				//var geometry = new THREE.IcosahedronGeometry( 10, 1 );
+				var geometry = new THREE.OctahedronGeometry( 5, 1 );
+				//var geometry = new THREE.TetrahedronGeometry( 5, 1 );
+
+				for ( var i = 0; i < 50; i ++ ) {
+
+					var object = new THREE.Mesh( geometry, 
+					//new THREE.MeshLambertMaterial( { color: Math.random() * 0xffffff } )
+					//new THREE.MeshLambertMaterial( { color: 0xffffff } )
+					//new THREE.MeshPhongMaterial( { ambient: 0x050505, color: 0x000000, specular: 0x555555, shininess: 30 } ) 
+					new THREE.MeshPhongMaterial( { 
+							ambient: Math.random() * 0x555555,
+							color: 0xff9900,
+							specular: Math.random() * 0x222222,
+							shininess: 0, 
+							wireframe: false, 
+							transparent: true,
+							overdraw: true,
+							shading: THREE.FlatShading
+						})  
+					);
+
+					object.position.x = Math.random() * 800 - 400;
+					object.position.y = Math.random() * 800 - 400;
+					object.position.z = Math.random() * 800 - 400;
+
+					object.rotation.x = Math.random() * 2 * Math.PI;
+					object.rotation.y = Math.random() * 2 * Math.PI;
+					object.rotation.z = Math.random() * 2 * Math.PI;
+
+					/*object.scale.x = Math.random() + 0.5;
+					object.scale.y = Math.random() + 0.5;
+					object.scale.z = Math.random() + 0.5;*/
+
+					scene.add( object );
+
+				}
+
+
+				//////////////////////////////////////////////////////////////////////
+				//
+				// Particles
+				//
+				//////////////////////////////////////////////////////////////////////
+
+				var geometry = new THREE.CubeGeometry( 4, 4, 4 );
+
+				for ( var i = 0; i < 50; i ++ ) {
+
+					var object = new THREE.Mesh( geometry, 
+					//new THREE.MeshLambertMaterial( { color: Math.random() * 0xffffff } )
+					//new THREE.MeshLambertMaterial( { color: 0xffffff } )
+					//new THREE.MeshPhongMaterial( { ambient: 0x050505, color: 0x000000, specular: 0x555555, shininess: 30 } ) 
+						new THREE.MeshPhongMaterial( { ambient: 0xff6600, color: 0xff6600, specular: 0xff6600, shininess: 10 } ) 
+					);
+
+					object.position.x = Math.random() * 800 - 400;
+					object.position.y = Math.random() * 800 - 400;
+					object.position.z = Math.random() * 800 - 400;
+
+					object.rotation.x = Math.random() * 2 * Math.PI;
+					object.rotation.y = Math.random() * 2 * Math.PI;
+					object.rotation.z = Math.random() * 2 * Math.PI;
+
+					/*object.scale.x = Math.random() + 0.5;
+					object.scale.y = Math.random() + 0.5;
+					object.scale.z = Math.random() + 0.5;*/
+
+					scene.add( object );
+
+				}
+
+
+				/*
+				*
+				*
+				*
+				*
+				*
+				*
+				*
+				*/
+
+				///////////////////////////////////////////
+				// RENDERER WebGLRenderer CanvasRenderer
+				///////////////////////////////////////////
+
+				if( (navigator.userAgent.match(/Chrome/i)) ) {
+					//renderer = new THREE.CanvasRenderer( {antialias:true} );
+					renderer = new THREE.WebGLRenderer({
+						antialias: true,
+						//clearColor: 0x000000,
+						//clearAlpha: 0,
+						alpha: true,
+						
+						//canvas: document.createElement( 'canvas' ),
+						clearColor: 0x000000,
+						clearAlpha: 1,
+						maxLights: 8,
+						stencil: false,
+						preserveDrawingBuffer: true 
+						/*****
+						preserveDrawingBuffer to allow screenshot
+						*****/
+					});
+				}
+				else{
+					//renderer = new THREE.WebGLRenderer( {antialias:true} );
+					renderer = new THREE.WebGLRenderer({ preserveDrawingBuffer: true, antialias:true });
+					//renderer = new THREE.CanvasRenderer( {antialias:true} );
+				}
+				
+				renderer.setClearColorHex( 0x111111, 0.8 );
+				renderer.setSize( windowHalfX, windowHalfY );
+				//renderer.autoClear = true;
+				container.appendChild( renderer.domElement );
+				
+
+
+
+
+
+
+				
+				scene.matrixAutoUpdate = true;
+				initPostprocessing();
+				
+				
+				
+				
+			
+				
+				var effectController  = {
+					focus: 		0.98, // 0.88 0.65
+					aperture:	0.012, // 0.016 0.025
+					maxblur:	0.6	 // 0.6 1.0
+				};
+
+				var matChanger = function( ) {
+					postprocessing.bokeh_uniforms[ "focus" ].value = effectController.focus;
+					postprocessing.bokeh_uniforms[ "aperture" ].value = effectController.aperture;
+					postprocessing.bokeh_uniforms[ "maxblur" ].value = effectController.maxblur;			
+				};			
+				
+				var gui = new dat.GUI();								
+				matChanger();			
+								
+				gui.add( effectController, "focus", 0.0, 9.0, 0.025 ).onChange( matChanger );
+				gui.add( effectController, "aperture", 0.001, 0.5, 0.001 ).onChange( matChanger );
+				gui.add( effectController, "maxblur", 0.0, 9.0, 0.025 ).onChange( matChanger );
+				
+				//gui.close();						
+							
+
+				/*
+				*
+				*
+				*
+				*
+				*
+				*
+				*
+				*/
+
+				stats = new Stats();
+				stats.domElement.style.position = 'absolute';
+				stats.domElement.style.top = '0px';
+				container.appendChild( stats.domElement );
+
+				document.addEventListener( 'mousemove', onDocumentMouseMove, false );
+				window.addEventListener( 'resize', onWindowResize, false );
+
+			}		
+			
+
+
+
+
+
+			
+			function initPostprocessing() {
+
+				postprocessing.scene = new THREE.Scene();
+
+				postprocessing.camera = new THREE.OrthographicCamera( window.innerWidth / - 2, window.innerWidth / 2,  window.innerHeight / 2, window.innerHeight / - 2, -10000, 10000 );
+				postprocessing.camera.position.z = -100;
+				
+				
+				/*postprocessing.camera = new THREE.PerspectiveCamera( 80, windowHalfX / windowHalfY, 1, 12500 );
+				postprocessing.camera.position.set( 10, -5.75, 30 );
+				postprocessing.camera.position.z = 10;		*/
+						
+				postprocessing.scene.add( postprocessing.camera );
+
+				var pars = { minFilter: THREE.LinearFilter, magFilter: THREE.LinearFilter, format: THREE.RGBFormat };
+				postprocessing.rtTextureDepth = new THREE.WebGLRenderTarget( windowHalfX, height, pars );
+				postprocessing.rtTextureColor = new THREE.WebGLRenderTarget( windowHalfX, height, pars );
+
+				var bokeh_shader = THREE.BokehShader;
+
+				postprocessing.bokeh_uniforms = THREE.UniformsUtils.clone( bokeh_shader.uniforms );
+
+				postprocessing.bokeh_uniforms[ "tColor" ].value = postprocessing.rtTextureColor;
+				postprocessing.bokeh_uniforms[ "tDepth" ].value = postprocessing.rtTextureDepth;
+				postprocessing.bokeh_uniforms[ "focus" ].value = 1.1;
+				postprocessing.bokeh_uniforms[ "aspect" ].value = windowHalfX / height;
+
+				postprocessing.materialBokeh = new THREE.ShaderMaterial( {
+
+					uniforms: postprocessing.bokeh_uniforms,
+					vertexShader: bokeh_shader.vertexShader,
+					fragmentShader: bokeh_shader.fragmentShader
+
+				} );
+
+				postprocessing.quad = new THREE.Mesh( new THREE.PlaneGeometry( window.innerWidth, window.innerHeight ), postprocessing.materialBokeh );
+				postprocessing.quad.position.z = - 500;
+				postprocessing.scene.add( postprocessing.quad );
+
+			}
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+
+			function onWindowResize() {
+				windowHalfX = window.innerWidth / 2;
+				windowHalfY = window.innerHeight / 2;
+				camera.aspect = window.innerWidth / window.innerHeight;
+				camera.updateProjectionMatrix();
+				renderer.setSize( window.innerWidth, window.innerHeight );
+			}
+
+			function onDocumentMouseMove( event ) {
+
+				/*
+				mouseX = ( event.clientX - windowHalfX );
+				mouseY = ( event.clientY - windowHalfY );*/
+
+			}
+
+			//
+
+			/*function animate() {
+				requestAnimationFrame( animate );
+				render();
+				stats.update();
+			}
+
+			function render() {
+				camera.position.x += ( mouseX - camera.position.x ) * 0.05;
+				camera.position.y += ( - mouseY - camera.position.y ) * 0.05;
+				camera.lookAt( scene.position );
+				renderer.render( scene, camera );
+			}*/
+
+
+		//
+
+
+			function loadTexture( path ) {
+				var texture = new THREE.Texture( texture_placeholder );
+				var material = new THREE.MeshBasicMaterial( { map: texture, overdraw: true } );
+				var image = new Image();
+				image.onload = function () {
+					texture.needsUpdate = true;
+					material.map.image = this;
+					render();
+				};
+				image.src = path;
+				return material;
+
+			}
+
+
+	////////////////////////////////////////////////////////////////////////
+			//
+			// LOADIMAGE
+			//
+			////////////////////////////////////////////////////////////////////////
+
+			function loadImage( path ) {
+				var image = document.createElement( 'img' );
+				var texture = new THREE.Texture( image, THREE.UVMapping )
+				image.onload = function () { texture.needsUpdate = true; };
+				image.src = path;
+				return texture;
+
+			}
+
+			function animate() {			
+			
+			
+				requestAnimationFrame( animate );
+				render();
+				stats.update();
+			}
+
+			var r = 0;
+
+			function render() {
+
+				theta += 0.059;
+				var time = Date.now() * 0.003;
+				//console.log(time.getMinutes())
+				
+				var d = new Date();
+				//console.log( d.getUTCHours() )
+				// getHours(), getMinutes(), getSeconds(), getMilliseconds()
+
+				camera.position.x = radius * Math.sin( THREE.Math.degToRad( theta ) );
+				camera.position.y = radius * Math.sin( THREE.Math.degToRad( theta ) );
+				camera.position.z = radius * Math.cos( THREE.Math.degToRad( theta ) );
+				
+				/*
+				http://threejsdoc.appspot.com/doc/three.js/src.source/cameras/PerspectiveCamera.js.html
+				http://javascript.info/tutorial/datetime-functions
+				http://www.cev.washington.edu/lc/CLWEBCLB/jst/js_datetime.html
+				
+				*/
+				//
+				//if(d.getSeconds()==30|| d.getSeconds()==15||d.getSeconds()==45){
+				/*if( d.getSeconds()% 30==2 ){
+				console.log( d.getSeconds() )
+					var randCamZoom = parseInt(Math.random() * 2)	
+					//camera = new THREE.PerspectiveCamera( CameraZoom[randCamZoom], windowHalfX / windowHalfY, 1, 2500 );
+					camera.fov = CameraZoom[randCamZoom];				
+				}*/				
+
+				//camera.position.x += ( mouseX - camera.position.x ) * .05;
+				//camera.position.y += ( - mouseY - camera.position.y ) * .05;
+				camera.updateProjectionMatrix();
+				camera.lookAt( scene.position );
+		
+				//http://threejs.org/docs/#Reference/Extras.Geometries/PolyhedronGeometry
+				// http://threejs.org/examples/#webgl_postprocessing
+				// http://threejs.org/examples/webgl_postprocessing.html
+				// http://i.ytimg.com/vi/19RnkADIkBc/maxresdefault.jpg
+				// http://i.ytimg.com/vi/-c5Evu8zlOI/maxresdefault.jpg
+
+				/*
+				----------------------------------
+
+				http://i.ytimg.com/vi/-c5Evu8zlOI/0.jpg
+				http://i.ytimg.com/vi/19RnkADIkBc/0.jpg
+				http://i.ytimg.com/vi/19RnkADIkBc/1.jpg
+				http://i.ytimg.com/vi/-c5Evu8zlOI/maxresdefault.jpg
+
+
+				http://i2.ytimg.com/vi/mRH0RnkrAyQ/mqdefault.jpg
+				http://i2.ytimg.com/vi/MnjMJBrxcAg/mqdefault.jpg
+				http://i2.ytimg.com/vi/yjyHbKM64pY/mqdefault.jpg
+				http://i2.ytimg.com/vi/4cdP651og8o/mqdefault.jpg
+				http://i2.ytimg.com/vi/VVoiG8LEQ8c/mqdefault.jpg
+				http://i2.ytimg.com/vi/19RnkADIkBc/mqdefault.jpg
+
+				-----
+
+				http://www.youtube.com/watch?v=-c5Evu8zlOI
+
+				*/		
+				
+				for ( var i = 0; i < SpheresX; i ++ ) {
+					objects[i].position.x + 1 * (parseInt(Math.random()*2) - 1 | 1);
+					objects[i].position.y + 1 * (parseInt(Math.random()*2) - 1 | 1);
+				}
+				
+		
+				// Position
+
+				/*group3.position.x = 500 * Math.cos( r );
+				group3.position.z = 500 * Math.sin( r );	
+				group9.position.x = -500 * Math.cos( r );
+				group9.position.z = 400 * Math.sin( r );*/
+
+				// Rotation
+
+				
+				
+				for ( var i = 0; i < SpheresX; i ++ ) {
+					objects[i].rotation.x = time * 0.9;
+					objects[i].rotation.z = time * 0.5;
+				}
+		
+
+				/*group1.rotation.x = time * 0.5;
+				group1.rotation.z = time * 0.5;		
+				group9.rotation.z = time * 0.8;
+				group9.rotation.y = time * 0.4;*/			
+
+				r += 0.003;
+				
+				if ( postprocessing.enabled ) {
+					renderer.clear();
+					// Render scene into texture
+					scene.overrideMaterial = null;
+					renderer.render( scene, camera, postprocessing.rtTextureColor, true );
+					// Render depth into texture
+					scene.overrideMaterial = material_depth;
+					renderer.render( scene, camera, postprocessing.rtTextureDepth, true );
+					// Render bokeh composite
+					renderer.render( postprocessing.scene, postprocessing.camera );
+
+				} else {
+					renderer.clear();
+					renderer.render( scene, camera );
+				}
+							
+
+				//renderer.render( scene, camera );
+				//renderer.domElement.toDataURL();
+		
+			}
+
+
+
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+
+
+
+
+		if(SaveAsVideo){
+
+			////////////////////////////////////////////////////////////////////////////
+			//
+			// Record
+			//
+			////////////////////////////////////////////////////////////////////////////
+
+			//var windowHalfX = 510; // 
+			//var windowHalfY = 288; // 
+
+			//var windowHalfX = 1280; // 
+			//var windowHalfY = 720; // 
+
+			//var windowHalfX = 720; // 
+			//var windowHalfY = 480; // 
+
+			var canvas_draw = $('#canvas-draw-fancy');
+			canvas_draw.width = windowHalfX;
+			canvas_draw.height = windowHalfY;
+			var canvas_draw = $('canvas')[1].getContext('2d');
+
+			draw_interval = setInterval(function() { // setInterval setTimeout
+
+				if(SaveAsWEbGL){
+
+					////////////////////////////////////////////////////////////////
+					//
+					// Export Image From WebGL
+					// http://jsfiddle.net/TxcTr/3/
+					//
+					////////////////////////////////////////////////////////////////
+
+					var imgData, img;
+					//Listen to 'P' key
+					//if(e.which !== 80) return;  
+					try {
+						imgData = renderer.domElement.toDataURL();      
+						//console.log(imgData);
+					} 
+					catch(e) {
+						//console.log("Browser does not support taking screenshot of 3d context");
+						return;
+					}
+					img = document.createElement("img");
+					img.src = imgData;
+					//document.body.appendChild(imgNode);
+
+				}
+				else{
+
+					////////////////////////////////////////////////////////////////
+					//
+					// Export Image From Canvas
+					//
+					////////////////////////////////////////////////////////////////
+
+					// import the image from the video
+					canvas_draw.drawImage(renderer.domElement, 0, 0, 320, 240);
+
+					// export the image from the canvas
+					var img = new Image();
+					img.src = $("canvas")[0].toDataURL('image/png');
+					img.width = 320;
+				
+				}
+
+				// set image data to php
+				var ajax = new XMLHttpRequest();
+				ajax.open("POST",'makefile.php',false);
+				ajax.setRequestHeader('Content-Type', 'application/upload');
+				ajax.send(img.src); 
+				
+				// print screens on same page if necesary
+				//document.body.appendChild(img);
+
+
+			}, 30)
+
+		}
+
+		</script>
+
+
+	</body>
+</html>
